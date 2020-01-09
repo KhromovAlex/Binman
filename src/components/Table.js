@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './Button';
 import Rating from './Rating';
 import classNames from 'classnames';
-import './style/Table.scss'
+import './style/Table.scss';
 
 export default class Table extends React.Component{
     constructor(props) {
@@ -107,8 +107,7 @@ export default class Table extends React.Component{
                         ))
                     }
                 </tbody>
-                
             </table>
         )
     }
-}
+};

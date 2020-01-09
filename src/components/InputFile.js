@@ -17,26 +17,18 @@ export default class InputFile extends React.Component{
     }
 
     render() {
-        const labelClass = ClassNames(
-            "input-file__label",
-            this.props.label
+        const className = ClassNames(
+            "input-file",
+            this.props.className
         );
-        const buttonClass = ClassNames(
-            "input-file__button",
-            this.props.button
-        );
-        const textClass = ClassNames(
-            "input-file__text",
-            this.props.text
-        );
+
         return (
-            <label className={labelClass}>
-                <div className={buttonClass}>Выберите файл</div>
-                <span className={textClass}>{this.state.inputFile !== "" ? this.state.inputFile : 'Файл не выбран'}</span>
+            <label className={className}>
+                <div className="input-file__button">Выберите файл</div>
+                <span className="input-file__text">{this.state.inputFile !== "" ? this.state.inputFile : 'Файл не выбран'}</span>
                 <input onChange={this.onChangeFile} className="input-file__input" type="file" />
             </label>
-            
-        );
+        )
     }
 };
 

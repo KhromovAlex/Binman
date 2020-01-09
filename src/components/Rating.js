@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './style/Rating.scss'
+import './style/Rating.scss';
 
 export default class Rating extends React.Component{
     static defaultProps = {
@@ -12,7 +12,7 @@ export default class Rating extends React.Component{
         super(props);
         this.state = {
             value: this.props.start,
-        }
+        };
     }
 
     newRating = (i) => () => {
@@ -33,7 +33,7 @@ export default class Rating extends React.Component{
                     "rating__item": true,
                     [fillClass]: Math.floor(this.state.value) >= i,
                     [strokeClass]: true,
-                    "read-only": this.props.readOnly,
+                    "rating__read-only": this.props.readOnly,
                 })
             }>
                 <svg className='icon-svg-rating'>

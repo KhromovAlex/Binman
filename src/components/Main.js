@@ -5,11 +5,11 @@ import './style/Main.scss';
 
 const Top = (props) => (
     <div className="main__wrapper-top">
-        <div className="wrap-title">
-            <h2 className="title-page">Ваши соискатели</h2>
-            <span className="count-clients gray-text">Всего соискателей: {props.clientList.length}</span>
+        <div>
+            <h2 className="main__title-page">Ваши соискатели</h2>
+            <span className="gray-text">Всего соискателей: {props.clientList.length}</span>
         </div>
-        <div className="btn-group"> 
+        <div> 
             <Button>
                 <svg className='icon-svg-favorit'>
                     <use xlinkHref='./img/sprite.svg#shape' />
