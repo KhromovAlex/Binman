@@ -1,0 +1,30 @@
+.input-file__label {
+    display: flex;
+    border: solid 1px #dce5ea;
+    background: #f4f9fb;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-file__button {
+    padding: 6px;
+    border: solid 1px #dbe4e7;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #386BF2;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.input-file__input {
+    display: none;
+}
+
+.input-file__text {
+    font-size: 12px;
+    color: #8ea4b5;
+    font-weight: 400;
+}

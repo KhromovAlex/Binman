@@ -1,0 +1,37 @@
+.sidebar {
+    width: 80px;
+    background: #323A45;
+    padding: 0 15px;
+}
+
+.content {
+    display: flex;
+    height: 100%;
+}
+
+.main-nav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-nav__link {
+    display: flex;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-nav__link.active {
+    background: #282E37;
+    border-radius: 5px;
+    
+    svg {
+        fill: #00D4FF !important;
+    }
+}
+
+.icon-svg-nav {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+}
