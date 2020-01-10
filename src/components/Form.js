@@ -15,57 +15,143 @@ export default class Form extends React.Component{
             ratingResume: 0,
             ratingTest: 0,
             ratingInterview: 0,
+            newClient: {
+                name: '',
+                vacancy: 'default',
+                img: '',
+                phone: '',
+                phone2: '',
+                email: '',
+                email2: '',
+                rezume: '',
+                arhive: '',
+                rating: 0,
+            },
         };
     }
 
     newRatingResume = (value) => {
         this.setState({
-            ratingResume: value
+            ratingResume: value,
+            newClient: {
+                ...this.state.newClient,
+                rating: (this.state.ratingInterview + this.state.ratingTest + value) / 3
+            },
         })
     }
 
     newRatingTest = (value) => {
         this.setState({
-            ratingTest: value
+            ratingTest: value,
+            newClient: {
+                ...this.state.newClient,
+                rating: (this.state.ratingInterview + this.state.ratingResume + value) / 3
+            },
         })
     }
 
     newRatingInterview = (value) => {
         this.setState({
-            ratingInterview: value
+            ratingInterview: value,
+            newClient: {
+                ...this.state.newClient,
+                rating: (this.state.ratingTest + this.state.ratingResume + value) / 3
+            },
         })
     }
 
-    addTel = () => {
+    addTelInput = (e) => {
         this.setState({
             buttonAddTel:false,
             isNewTel:true,
         });
     }
 
-    addEmail = () => {
+    addEmailInput = (e) => {
         this.setState({
             buttonAddEmail:false,
             isNewEmail:true,
         });
     }
 
+    changeFullName = ({target}) => {
+        console.log(target.value)
+        this.setState({
+            newClient: {
+                ...this.state.newClient,
+                name: target.value,
+            }
+        });
+    }
+
+    changeVacancy = ({target}) => {
+        this.setState({
+            newClient: {
+                ...this.state.newClient,
+                vacancy: target.value,
+            },
+        });
+    }
+
+    changePhone = ({target}) => {
+        this.setState({
+            newClient: {
+                ...this.state.newClient,
+                phone: target.value,
+            },
+        });
+    }
+
+    changePhone2 = ({target}) => {
+        this.setState({
+            newClient: {
+                ...this.state.newClient,
+                phone2: target.value,
+            },
+        });
+    }
+
+    changeEmail = ({target}) => {
+        this.setState({
+            newClient: {
+                ...this.state.newClient,
+                email: target.value,
+            },
+        });
+    }
+
+    changeEmail2 = ({target}) => {
+        this.setState({
+            newClient: {
+                ...this.state.newClient,
+                email2: target.value,
+            },
+        });
+    }
+
+    submitFormClient = (e) => {
+        e.preventDefault();
+        this.props.addNewClient(this.state.newClient)
+    }
+    
     render() {
         return (
             <div className="modal">
-                <form className="form">
+                <form className="form" onSubmit={this.submitFormClient}>
                     <Button onClick={this.props.hiddenForm} type='button' className="modal__close">x</Button>
                     <h2 className="form__title">добавление соискателя</h2>
                     <section className="form__section">
                         <h3 className="form__subtitle">основные данные</h3>
                         <label>
                             <div className="form__label">ФИО</div>
-                            <input className="form__input" type="text" placeholder="Введите ФИО" />
+                            <input onChange={this.changeFullName} value={this.state.newClient.name} className="form__input" type="text" placeholder="Введите ФИО" />
                         </label>
                         <label>
                             <div className="form__label">вакансия</div>
-                            <select className="form__input" defaultValue={{value: 'default'}}>
-                                <option disabled value={{value: 'default'}} >Выберите вакансию</option>
+                            <select onChange={this.changeVacancy} className="form__input" value={this.state.newClient.vacancy}>
+                                <option disabled value={'default'} >Выберите вакансию</option>
+                                <option value={'Frontend'} >Frontend</option>
+                                <option value={'Backend'} >Backend</option>
                             </select>
                         </label>
                         <h6 className="form__label">фотография</h6>
@@ -76,16 +162,16 @@ export default class Form extends React.Component{
                         <h3 className="form__subtitle">контактные данные</h3>
                         <label>
                             <div className="form__label">номер телефона</div>
-                            <input placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />
-                            {this.state.isNewTel && <input className="form__input form__input-tel" type="tel" />}
+                            <input onChange={this.changePhone} value={this.state.newClient.phone} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />
+                            {this.state.isNewTel && <input onChange={this.changePhone2} value={this.state.newClient.phone2} className="form__input form__input-tel" type="tel" />}
                         </label>
-                        {this.state.buttonAddTel ? <Button onClick={this.addTel} type="button" className="form__button-add">Добавить еще один номер телефона</Button> : null}
+                        {this.state.buttonAddTel ? <Button onClick={this.addTelInput} type="button" className="form__button-add">Добавить еще один номер телефона</Button> : null}
                         <label>
                             <div className="form__label">e-mail</div>
-                            <input placeholder="Введите e-mail" className="form__input form__input-email" type="email" />
-                            {this.state.isNewEmail && <input className="form__input form__input-email" type="email" />}
+                            <input onChange={this.changeEmail} value={this.state.newClient.email} placeholder="Введите e-mail" className="form__input form__input-email" type="email" />
+                            {this.state.isNewEmail && <input onChange={this.changeEmail2} value={this.state.newClient.email2} className="form__input form__input-email" type="email" />}
                         </label>
-                        {this.state.buttonAddEmail ? <Button onClick={this.addEmail} type="button" className="form__button-add">Добавить еще один e-mail</Button> : null}
+                        {this.state.buttonAddEmail ? <Button onClick={this.addEmailInput} type="button" className="form__button-add">Добавить еще один e-mail</Button> : null}
                     </section>
                     <section className="form__section">
                         <h3 className="form__subtitle">резюме и результаты тестового задания</h3>
