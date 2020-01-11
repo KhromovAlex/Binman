@@ -12,7 +12,7 @@ export default [
     {
         name: 'Дурков Павел Валерьевич',
         img: 'img/avatars/ava2.jpeg',
-        phone: 'Телефон не указан',
+        phone: '',
         email: 'durkov@vkontakte.ru',
         vacancy: 'Full-stack разрабочик',
         rating: 1
@@ -28,8 +28,8 @@ export default [
     {
         name: 'Чулков Олег',
         img: '',
-        phone: 'Телефон не указан',
-        email: 'E-mail не указан',
+        phone: '',
+        email: '',
         vacancy: 'Web-дизайнер',
         rating: 2
     },

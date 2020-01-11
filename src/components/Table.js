@@ -1,7 +1,9 @@
 import React from 'react';
 import Button from './Button';
 import Rating from './Rating';
+import ToggleContact from './ToggleContact';
 import classNames from 'classnames';
+import { uniqueId } from 'lodash';
 import './style/Table.scss';
 
 export default class Table extends React.Component{
@@ -19,7 +21,7 @@ export default class Table extends React.Component{
                     <tr className="row">
                         {                            
                             thead.map((item, index) => (
-                                <td className="cell table__title" key={index}>{item}</td>
+                                <td className="cell table__title" key={uniqueId()}>{item}</td>
                             ))
                         }
                     </tr>
@@ -34,7 +36,7 @@ export default class Table extends React.Component{
                 <tbody>
                     {
                         clientList.map((item, index) => (
-                            <tr key={index} className="row client-info">
+                            <tr key={uniqueId()} className="row client-info">
                                <td className="cell client-info__text">
                                    <div className="client-info__avatar">
                                         {item.img ? <img src={item.img} alt="avatar" className="client-info__img" /> : <img src="img/avatars/default.svg" alt="avatar" className="client-info__svg" />}
@@ -49,7 +51,7 @@ export default class Table extends React.Component{
                                        classNames({
                                             cell: true,
                                             "client-info__phone": true,
-                                            'no-value': item.phone === 'Телефон не указан',
+                                            'no-value': item.phone === '',
                                         })
                                     }>
                                     <div className="cell-inner-wrap">
@@ -59,15 +61,15 @@ export default class Table extends React.Component{
                                             </svg>
                                         </div>
                                         <div>
-                                            <span className="table__text">{item.phone}</span>
-                                            {item.phone2 ? <><br /><Button type="button" className="button_gray-a">Показать еще 1 номер</Button></> : null}
+                                            <span className="table__text">{item.phone ? item.phone : "Телефон не указан"}</span>
+                                            <ToggleContact item={item.phone2} className="table__text" text="Показать еще 1 номер" />
                                         </div>
                                     </div>
                                 </td>
                                <td className={
                                         classNames({
                                             cell: true,
-                                            'no-value': item.email === 'E-mail не указан',
+                                            'no-value': item.email === '',
                                         })
                                     }>
                                     <div className="cell-inner-wrap">
@@ -77,8 +79,8 @@ export default class Table extends React.Component{
                                             </svg>
                                         </div>
                                         <div>
-                                            <span className="table__text">{item.email}</span>
-                                            {item.email2 ? <><br /><Button type="button" className="button_gray-a">Показать еще 1 e-mail</Button></> : null}
+                                            <span className="table__text">{item.email ? item.email : 'E-mail не указан'}</span>
+                                            <ToggleContact item={item.email2} className="table__text" text="Показать еще 1 e-mail" />
                                         </div>
                                     </div>
                                 </td>
