@@ -37,8 +37,8 @@ export default class App extends React.Component {
     addNewClient = (value) => {
         this.setState({
             clients: [
+                value,
                 ...this.state.clients,
-                value
             ]
         });
     }

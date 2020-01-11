@@ -30,102 +30,29 @@ export default class Form extends React.Component{
         };
     }
 
-    newRatingResume = (value) => {
+    newRating = (typeRating) => (value) => {
         this.setState({
-            ratingResume: value,
+            [`rating${typeRating}`]: value,
             newClient: {
                 ...this.state.newClient,
-                rating: (this.state.ratingInterview + this.state.ratingTest + value) / 3
+                rating: (this.state.ratingTest + this.state.ratingResume + this.state.ratingInterview) / 3
             },
         })
     }
 
-    newRatingTest = (value) => {
+    addInput = ({target}) => {
         this.setState({
-            ratingTest: value,
-            newClient: {
-                ...this.state.newClient,
-                rating: (this.state.ratingInterview + this.state.ratingResume + value) / 3
-            },
-        })
-    }
-
-    newRatingInterview = (value) => {
-        this.setState({
-            ratingInterview: value,
-            newClient: {
-                ...this.state.newClient,
-                rating: (this.state.ratingTest + this.state.ratingResume + value) / 3
-            },
-        })
-    }
-
-    addTelInput = (e) => {
-        this.setState({
-            buttonAddTel:false,
-            isNewTel:true,
+            [`buttonAdd${target.name}`]: false,
+            [`isNew${target.name}`]:true,
         });
     }
 
-    addEmailInput = (e) => {
-        this.setState({
-            buttonAddEmail:false,
-            isNewEmail:true,
-        });
-    }
-
-    changeFullName = ({target}) => {
-        console.log(target.value)
+    changeInput = ({target}) => {
         this.setState({
             newClient: {
                 ...this.state.newClient,
-                name: target.value,
+                [target.name]: target.value,
             }
-        });
-    }
-
-    changeVacancy = ({target}) => {
-        this.setState({
-            newClient: {
-                ...this.state.newClient,
-                vacancy: target.value,
-            },
-        });
-    }
-
-    changePhone = ({target}) => {
-        this.setState({
-            newClient: {
-                ...this.state.newClient,
-                phone: target.value,
-            },
-        });
-    }
-
-    changePhone2 = ({target}) => {
-        this.setState({
-            newClient: {
-                ...this.state.newClient,
-                phone2: target.value,
-            },
-        });
-    }
-
-    changeEmail = ({target}) => {
-        this.setState({
-            newClient: {
-                ...this.state.newClient,
-                email: target.value,
-            },
-        });
-    }
-
-    changeEmail2 = ({target}) => {
-        this.setState({
-            newClient: {
-                ...this.state.newClient,
-                email2: target.value,
-            },
         });
     }
 
@@ -144,11 +71,11 @@ export default class Form extends React.Component{
                         <h3 className="form__subtitle">основные данные</h3>
                         <label>
                             <div className="form__label">ФИО</div>
-                            <input onChange={this.changeFullName} value={this.state.newClient.name} className="form__input" type="text" placeholder="Введите ФИО" />
+                            <input name='name' onChange={this.changeInput} value={this.state.newClient.name} className="form__input" type="text" placeholder="Введите ФИО" />
                         </label>
                         <label>
                             <div className="form__label">вакансия</div>
-                            <select onChange={this.changeVacancy} className="form__input" value={this.state.newClient.vacancy}>
+                            <select name='vacancy' onChange={this.changeInput} className="form__input" value={this.state.newClient.vacancy}>
                                 <option disabled value={'default'} >Выберите вакансию</option>
                                 <option value={'Frontend'} >Frontend</option>
                                 <option value={'Backend'} >Backend</option>
@@ -162,16 +89,16 @@ export default class Form extends React.Component{
                         <h3 className="form__subtitle">контактные данные</h3>
                         <label>
                             <div className="form__label">номер телефона</div>
-                            <input onChange={this.changePhone} value={this.state.newClient.phone} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />
-                            {this.state.isNewTel && <input onChange={this.changePhone2} value={this.state.newClient.phone2} className="form__input form__input-tel" type="tel" />}
+                            <input name='phone' onChange={this.changeInput} value={this.state.newClient.phone} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />
+                            {this.state.isNewTel && <input name='phone2' onChange={this.changeInput} value={this.state.newClient.phone2} className="form__input form__input-tel" type="tel" />}
                         </label>
-                        {this.state.buttonAddTel ? <Button onClick={this.addTelInput} type="button" className="form__button-add">Добавить еще один номер телефона</Button> : null}
+                        {this.state.buttonAddTel ? <Button name="Tel" onClick={this.addInput} type="button" className="form__button-add">Добавить еще один номер телефона</Button> : null}
                         <label>
                             <div className="form__label">e-mail</div>
-                            <input onChange={this.changeEmail} value={this.state.newClient.email} placeholder="Введите e-mail" className="form__input form__input-email" type="email" />
-                            {this.state.isNewEmail && <input onChange={this.changeEmail2} value={this.state.newClient.email2} className="form__input form__input-email" type="email" />}
+                            <input name='email' onChange={this.changeInput} value={this.state.newClient.email} placeholder="Введите e-mail" className="form__input form__input-email" type="email" />
+                            {this.state.isNewEmail && <input name='email2' onChange={this.changeInput} value={this.state.newClient.email2} className="form__input form__input-email" type="email" />}
                         </label>
-                        {this.state.buttonAddEmail ? <Button onClick={this.addEmailInput} type="button" className="form__button-add">Добавить еще один e-mail</Button> : null}
+                        {this.state.buttonAddEmail ? <Button name="Email" onClick={this.addInput} type="button" className="form__button-add">Добавить еще один e-mail</Button> : null}
                     </section>
                     <section className="form__section">
                         <h3 className="form__subtitle">резюме и результаты тестового задания</h3>
@@ -187,15 +114,15 @@ export default class Form extends React.Component{
                         <ul className="form__group-rating">
                             <li>
                                 <span className="form__label">оценка резюме</span>
-                                <Rating value={this.newRatingResume} readOnly={false} start={this.state.ratingResume} />
+                                <Rating onChangeRating={this.newRating('Resume')} readOnly={false} value={this.state.ratingResume} />
                             </li>
                             <li>
                                 <span className="form__label">оценка тестового задания</span>
-                                <Rating value={this.newRatingTest} readOnly={false} start={this.state.ratingTest} />
+                                <Rating onChangeRating={this.newRating('Test')} readOnly={false} value={this.state.ratingTest} />
                             </li>
                             <li>
                                 <span className="form__label">оценка собеседования</span>
-                                <Rating value={this.newRatingInterview} readOnly={false} start={this.state.ratingInterview} />
+                                <Rating onChangeRating={this.newRating('Interview')} readOnly={false} value={this.state.ratingInterview} />
                             </li>
                         </ul>
                     </section>

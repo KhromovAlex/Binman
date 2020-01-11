@@ -4,36 +4,38 @@ import './style/Rating.scss';
 
 export default class Rating extends React.Component{
     static defaultProps = {
-        start: 0,
         readOnly: true,
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.start,
+            value: 0,
         };
     }
 
-    newRating = (i) => () => {
-        this.props.value(i);
+    newRating = (i) => (e) => {
+        this.props.onChangeRating(i, e);
         this.setState({
             value: i
         });
     }
 
     renderItems = () => {
+        const { readOnly, value: valueProp } = this.props;
+        const { value: valueState } = this.state;
+        let currentValue = readOnly ? valueProp : valueState;        
         const items = [1,2,3,4,5];
-        const fillClass = this.state.value ? `fill${Math.floor(this.state.value)}` : null;
-        const strokeClass = this.state.value ? `stroke${Math.floor(this.state.value)}` : null;
+        const fillClass = currentValue ? `fill${Math.floor(currentValue)}` : null;
+        const strokeClass = currentValue ? `stroke${Math.floor(currentValue)}` : null;
         
         return items.map( (i, index) => (
-            <li key={index} onClick={this.props.readOnly ? () => {} : this.newRating(i)} className={
+            <li key={index} onClick={readOnly ? () => {} : this.newRating(i)} className={
                 classNames({
                     "rating__item": true,
-                    [fillClass]: Math.floor(this.state.value) >= i,
+                    [fillClass]: Math.floor(currentValue) >= i,
                     [strokeClass]: true,
-                    "rating__read-only": this.props.readOnly,
+                    "rating__read-only": readOnly,
                 })
             }>
                 <svg className='icon-svg-rating'>
