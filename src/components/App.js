@@ -3,6 +3,7 @@ import Main from './Main';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Form from './Form';
+import classNames from 'classnames';
 import clientsList from './../clients';
 import './style/App.scss';
 
@@ -44,10 +45,15 @@ export default class App extends React.Component {
     }
 
     render() {
+        const { openForm } = this.state;
+        const classContent = classNames({
+            content: true,
+            "content_overflow": openForm,
+        });
         return (
             <>
                 <Header />
-                <div className="content">
+                <div className={classContent}>
                     <Sidebar />
                     <Main showForm={this.showForm} clientList={this.state.clients} />
                     {this.state.openForm ? <Form addNewClient={this.addNewClient} hiddenForm={this.hiddenForm} /> : null}

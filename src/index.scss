@@ -18,6 +18,7 @@ body {
 #root {
   display: flex;
   flex-direction: column;
+  min-width: 1160px;
 }
 
 a, a:hover, a:active, a:visited {
