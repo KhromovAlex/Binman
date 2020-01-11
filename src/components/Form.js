@@ -31,11 +31,14 @@ export default class Form extends React.Component{
     }
 
     newRating = (typeRating) => (value) => {
+        const resume = typeRating === "Resume" ? value : this.state.ratingResume;
+        const test = typeRating === "Test" ? value : this.state.ratingTest;
+        const interview = typeRating === "Interview" ? value : this.state.ratingInterview;
         this.setState({
             [`rating${typeRating}`]: value,
             newClient: {
                 ...this.state.newClient,
-                rating: (this.state.ratingTest + this.state.ratingResume + this.state.ratingInterview) / 3
+                rating: (resume + test + interview) / 3
             },
         })
     }
@@ -58,7 +61,8 @@ export default class Form extends React.Component{
 
     submitFormClient = (e) => {
         e.preventDefault();
-        this.props.addNewClient(this.state.newClient)
+        this.props.addNewClient(this.state.newClient);
+        this.props.hiddenForm();
     }
     
     render() {
