@@ -85,7 +85,7 @@ export default class Table extends React.Component{
                                     </div>
                                 </td>
                                <td className="cell">
-                                    <Rating value={item.rating} />
+                                    <Rating start={item.rating} />
                                     <span className="gray-text">Средний балл: <span className="cell__rating-point">{item.rating.toFixed(1)}</span></span>
                                 </td>
                                <td className="cell">

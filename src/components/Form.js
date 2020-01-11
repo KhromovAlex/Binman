@@ -118,15 +118,15 @@ export default class Form extends React.Component{
                         <ul className="form__group-rating">
                             <li>
                                 <span className="form__label">оценка резюме</span>
-                                <Rating onChangeRating={this.newRating('Resume')} readOnly={false} value={this.state.ratingResume} />
+                                <Rating onChangeRating={this.newRating('Resume')} readOnly={false} />
                             </li>
                             <li>
                                 <span className="form__label">оценка тестового задания</span>
-                                <Rating onChangeRating={this.newRating('Test')} readOnly={false} value={this.state.ratingTest} />
+                                <Rating onChangeRating={this.newRating('Test')} readOnly={false} />
                             </li>
                             <li>
                                 <span className="form__label">оценка собеседования</span>
-                                <Rating onChangeRating={this.newRating('Interview')} readOnly={false} value={this.state.ratingInterview} />
+                                <Rating onChangeRating={this.newRating('Interview')} readOnly={false} />
                             </li>
                         </ul>
                     </section>
