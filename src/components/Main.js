@@ -1,38 +1,13 @@
 import React from 'react';
 import Table from './Table';
-import Button from './Button';
+import TopMain from './TopMain';
 import './style/Main.scss';
 
-const Top = (props) => (
-    <div className="main__wrapper-top">
-        <div>
-            <h2 className="main__title-page">Ваши соискатели</h2>
-            <span className="gray-text">Всего соискателей: {props.clientList.length}</span>
-        </div>
-        <div> 
-            <Button>
-                <svg className='icon-svg-favorit'>
-                    <use xlinkHref='./img/sprite.svg#shape' />
-                </svg>
-                Избранные
-            </Button>
-            <Button className="button_blue button_margin-left" onClick={props.showForm}>
-                <svg className='icon-svg-add-user'>
-                    <use xlinkHref='./img/sprite.svg#plus' />
-                </svg>
-                Добавить соискателя
-            </Button>
-        </div>
-    </div>
+const Main = (props) => (
+    <main className="main">
+        <TopMain showForm={props.showForm} clientList={props.clientList} />
+        <Table clientList={props.clientList} />
+    </main>
 );
 
-export default class Main extends React.Component{
-    render() {
-        return (
-            <main className="main">
-                <Top showForm={this.props.showForm} clientList={this.props.clientList} />
-                <Table clientList={this.props.clientList} />
-            </main>
-        )
-    }
-}
+export default Main;

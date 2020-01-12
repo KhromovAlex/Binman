@@ -12,8 +12,7 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             clients: [],
-            openForm: false,
-            newClient: {},
+            isOpenForm: false,
         };
     }
 
@@ -23,40 +22,35 @@ export default class App extends React.Component {
         });
     }
 
-    showForm = () => {
-        this.setState({
-            openForm: true,
-        });
-    }
-
-    hiddenForm = () => {
-        this.setState({
-            openForm: false,
-        });
+    toggleForm = () => {
+        this.setState(({isOpenForm}) => ({
+            isOpenForm: !isOpenForm,
+        }));
     }
 
     addNewClient = (value) => {
-        this.setState({
+        this.setState((oldState) => ({
             clients: [
                 value,
-                ...this.state.clients,
+                ...oldState.clients,
             ]
-        });
+        }));
     }
 
     render() {
-        const { openForm } = this.state;
+        const { isOpenForm } = this.state;
         const classContent = classNames({
             content: true,
-            "content_overflow": openForm,
+            "content_overflow": isOpenForm,
         });
+        
         return (
             <>
                 <Header />
                 <div className={classContent}>
                     <Sidebar active='clients' />
-                    <Main showForm={this.showForm} clientList={this.state.clients} />
-                    {this.state.openForm ? <Form addNewClient={this.addNewClient} hiddenForm={this.hiddenForm} /> : null}
+                    <Main showForm={this.toggleForm} clientList={this.state.clients} />
+                    {this.state.isOpenForm ? <Form addNewClient={this.addNewClient} hiddenForm={this.toggleForm} /> : null}
                 </div>                
             </>
         );
