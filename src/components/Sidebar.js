@@ -1,28 +1,38 @@
 import React from 'react';
+import Button from './Button';
+import classNames from 'classnames';
+import { uniqueId } from 'lodash';
 import './style/Sidebar.scss';
 
-const Sidebar = () => (
-    <aside className="sidebar">
-        <nav className="main-nav">
-            <ul>
-                <li><a href="/" className="main-nav__link">
-                    <svg className='icon-svg-nav'>
-                        <use xlinkHref='./img/sprite.svg#home' />
-                    </svg>
-                </a></li>
-                <li><a href="/" className="main-nav__link active">
-                    <svg className='icon-svg-nav'>
-                        <use xlinkHref='./img/sprite.svg#clients' />
-                    </svg>
-                </a></li>
-                <li><a href="/" className="main-nav__link">
-                    <svg className='icon-svg-nav'>
-                        <use xlinkHref='./img/sprite.svg#reports' />
-                    </svg>
-                </a></li>
-            </ul>
-        </nav>
-    </aside>
-);
+const Sidebar = (props) => {
+    const navList = [
+        'home',
+        'clients',
+        'reports',
+    ];
+
+    return (
+        <aside className="sidebar">
+            <nav className="main-nav">
+                <ul className="main-nav__list">
+                    {navList.map( (item) => (
+                        <li key={uniqueId()} className="main-nav__item">
+                            <Button type="button" className={
+                                classNames({
+                                    'main-nav__link': true,
+                                    active: props.active === item,
+                                })
+                            }>
+                                <svg className='icon-svg-nav'>
+                                    <use xlinkHref={`./img/sprite.svg#${item}`} />
+                                </svg>
+                            </Button>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </aside>
+    );
+};
 
 export default Sidebar;

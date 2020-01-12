@@ -54,7 +54,7 @@ export default class App extends React.Component {
             <>
                 <Header />
                 <div className={classContent}>
-                    <Sidebar />
+                    <Sidebar active='clients' />
                     <Main showForm={this.showForm} clientList={this.state.clients} />
                     {this.state.openForm ? <Form addNewClient={this.addNewClient} hiddenForm={this.hiddenForm} /> : null}
                 </div>                
