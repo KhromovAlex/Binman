@@ -9,10 +9,15 @@
     flex-direction: column;
 }
 
+.main-nav__item + .main-nav__item {
+    margin-top: 10px;
+}
+
 .main-nav__link {
     padding: 12px;
     background: none;
     border: 0;
+    transition: all .5s;
 }
 
 .icon-svg-nav {
@@ -32,4 +37,5 @@
 
 .main-nav__link:hover {
     background: rgba(#fff, .1);
+    transition: all .5s;
 }

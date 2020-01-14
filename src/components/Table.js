@@ -7,10 +7,10 @@ import './style/Table.scss';
 const Table = (props) => (
     <table className="table">
         <TableHead />
-        <TableFoot />
         <tbody>
             <TableRow clientList={props.clientList} />
         </tbody>
+        <TableFoot />
     </table>
 );
 

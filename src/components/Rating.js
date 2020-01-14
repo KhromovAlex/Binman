@@ -3,36 +3,19 @@ import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import './style/Rating.scss';
 
-export default class Rating extends React.Component{
-    static defaultProps = {
-        readOnly: true,
-        start: 0,
+const Rating = (props) => {
+    const newRating = (i) => () => {
+        props.onChangeRating(i);
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: this.props.start,
-        };
-    }
-
-    newRating = (i) => () => {
-        this.props.onChangeRating(i);
-        this.setState({
-            value: i
-        });
-    }
-
-    renderItems = () => {
-        const { readOnly } = this.props;
-        const { value } = this.state;
-        // let currentValue = readOnly ? valueProp : value;        
+    const renderItems = () => {
+        const { readOnly, value } = props;
         const items = [1,2,3,4,5];
         const fillClass = value ? `fill${Math.floor(value)}` : null;
         const strokeClass = value ? `stroke${Math.floor(value)}` : null;
         
-        return items.map( (i, index) => (
-            <li key={uniqueId()} onClick={readOnly ? () => {} : this.newRating(i)} className={
+        return items.map( (i) => (
+            <li key={uniqueId()} onClick={readOnly ? () => {} : newRating(i)} className={
                 classNames({
                     "rating__item": true,
                     [fillClass]: Math.floor(value) >= i,
@@ -46,12 +29,16 @@ export default class Rating extends React.Component{
             </li>
         ));
     }
+    
+    return (
+        <ul className="rating">
+            { renderItems() }
+        </ul>
+    );
+};
 
-    render() {
-        return (
-            <ul className="rating">
-                { this.renderItems() }
-            </ul>
-        );
-    }
-}
+Rating.defaultProps = {
+    readOnly: true
+};
+
+export default Rating;

@@ -49,7 +49,7 @@ const TableRow = (props) => {
                     />
                 </td>
                 <td className="cell">
-                    <Rating start={item.rating} />
+                    <Rating value={item.rating} />
                     <span className="gray-text">Средний балл: <span className="cell__rating-point">{item.rating.toFixed(1)}</span></span>
                 </td>
                 <td className="cell">

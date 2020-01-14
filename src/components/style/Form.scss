@@ -28,11 +28,11 @@
     width: 45%;
     height: auto;
     background: #fff;
-    padding: 20px 25px;
 }
 
 .form__section {
-    margin-top: 40px;
+    border-top: 1px solid #F4F9FB;
+    padding: 20px 25px;
 }
 
 .form__title {
@@ -48,9 +48,22 @@
     margin-bottom: 16px;
 }
 
+.form__notice {
+    margin-top: 4px;
+}
+
 .form__label {
     @extend .form__title;
     font-size: 11px;
+    display: flex;
+}
+
+.form__section > .form__label {
+    margin-top: 20px;
+}
+
+.form__section > .form__label:first-of-type {
+    margin-top: 0;
 }
 
 .form__input {
@@ -58,14 +71,12 @@
     border: solid 1px #dce5ea;
     background: #f4f9fb;
     padding: 10px 12px;
-    margin-bottom: 20px;
     margin-top: 8px;
     font-size: 12px;
 }
 
 .form__input-file {
     margin-top: 8px;
-    margin-bottom: 20px;
 }
 
 .form__input-tel, .form__input-email {
@@ -76,6 +87,11 @@
 .form__group-rating, .form__btn-group {
     display: flex;
     justify-content: space-between;
+    margin: 0;
+
+    .rating {
+        margin-top: 6px;
+    }
 }
 
 .form__button-add {
@@ -84,7 +100,6 @@
     font-weight: 400;
     border: none;
     padding: 0;
-    margin-bottom: 20px;
 
     &:last-child {
         margin-bottom: 0;
