@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button';
 import InputFile from './InputFile';
 import Rating from './Rating';
+import InputMask from 'react-input-mask';
 import { uniqueId } from 'lodash';
 import './style/Form.scss'
 
@@ -101,9 +102,9 @@ export default class Form extends React.Component{
                     <section className="form__section">
                         <h3 className="form__subtitle">контактные данные</h3>
                         <label htmlFor="input-phone" className="form__label">номер телефона</label>
-                        <input id="input-phone" name='phone' onChange={this.changeInput} value={newClient.phone} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />
+                        <InputMask mask="+7 (999) 999-99-99" id="input-phone" name='phone' onChange={this.changeInput} value={newClient.phone} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />
                         {isNewTel && 
-                            <input name='phone2' onChange={this.changeInput} value={newClient.phone2} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />}
+                            <InputMask mask="+7 (999) 999-99-99" name='phone2' onChange={this.changeInput} value={newClient.phone2} placeholder="Введите номер телефона" className="form__input form__input-tel" type="tel" />}
                         {buttonAddTel ? <Button name="Tel" onClick={this.addInput} type="button" className="form__button-add">Добавить еще один номер телефона</Button> : null}
                         <label htmlFor="input-email" className="form__label">e-mail</label>
                         <input id="input-email" name='email' onChange={this.changeInput} value={newClient.email} placeholder="Введите e-mail" className="form__input form__input-email" type="email" />
